@@ -1,4 +1,4 @@
-# YOLOv5转NCNN
+YOLOv5转NCNN
 
 基于YOLOv5最新[v5.0 release](https://github.com/ultralytics/yolov5/releases/tag/v5.0)，和NCNN官方给出example的差别主要有：
 
@@ -19,7 +19,11 @@ make -j8
 
 可以看到:
 
-![](build/yolov5.jpg)
+<p align="center">
+<img src="build/yolov5.jpg">
+</p>
+
+
 
 ## 安卓
 
@@ -39,7 +43,11 @@ python detect.py --weights yolov5s.pt --source data/images
 
 效果不错：
 
-![](images/bus.jpg)
+<p align="center">
+<img src="images/bus.jpg">
+</p>
+
+
 
 导出 onnx，并用 onnx-simplifer 简化模型，这里稍微不同，如果按照[详细记录u版YOLOv5目标检测ncnn实现](https://zhuanlan.zhihu.com/p/275989233?utm_source=qq),那么直接导出来的模型可以看到输出:
 
@@ -47,27 +55,39 @@ python detect.py --weights yolov5s.pt --source data/images
 python models/export.py --weights yolov5s.pt --img 640 --batch 1
 ```
 
-![](images/Screenshot from 2021-05-22 19-24-44.png)
+<p align="center">
+<img src="images/Screenshot from 2021-05-22 19-24-44.png">
+</p>
+
+
 
 可以看到后处理怎么都出来了？？？
 
 看看models/yolo.py代码发现：
 
-![](images/Screenshot from 2021-05-22 19-47-51.png)
+<p align="center">
+<img src="images/Screenshot from 2021-05-22 19-47-51.png">
+</p>
 
 inference里面不就对应上面onnx模型那部分输出处理后然后torch.cat起来么，这部分处理我们放在代码里面做，所以可以注释这部分：
 
-![](images/Screenshot from 2021-05-22 19-49-54.png)
+<p align="center">
+<img src="images/Screenshot from 2021-05-22 19-49-54.png">
+</p>
 
 这样导出来的模型就是三个输出了：
 
-![](images/Screenshot from 2021-05-22 19-26-13.png)
+<p align="center">
+<img src="images/Screenshot from 2021-05-22 19-26-13.png">
+</p>
 
 
 
 ok,输出和[详细记录u版YOLOv5目标检测ncnn实现](https://zhuanlan.zhihu.com/p/275989233?utm_source=qq)对应上了，同时可以看到激活函数silu：
 
-![](images/Screenshot from 2021-05-21 21-01-21.png)
+<p align="center">
+<img src="images/Screenshot from 2021-05-21 21-01-21.png">
+</p>
 
 经过onnx-sim简化一下：
 
