@@ -1,0 +1,3 @@
+/home/kong/yolov5_prune/yolov5_ncnn/build/CMakeFiles/edit_cache.dir
+/home/kong/yolov5_prune/yolov5_ncnn/build/CMakeFiles/yolov5s.dir
+/home/kong/yolov5_prune/yolov5_ncnn/build/CMakeFiles/rebuild_cache.dir
