@@ -215,8 +215,8 @@ find images/ -type f > imagelist.txt
 
 |               | input | inference time | model size |
 | ------------- | ----- | -------------- | ---------- |
-| yolov5s       | 416   | 22 ms          | 14.6 M     |
-| yolov5s-prune | 416   | 18 ms          | 1.7 M      |
-| yolov5s-int8  | 416   | 52ms           | 887.5k     |
+| yolov5s       | 416   | 22 ms          | 14.6 M(fp16)     |
+| yolov5s-prune | 416   | 18 ms          | 1.7 M(fp16)      |
+| yolov5s-int8  | 416   | 52ms           | 887.5k(int8)     |
 
 目前int8量化后效果还不错，但是推理时间慢了很多，待续。
