@@ -1,5 +1,11 @@
 YOLOv5转NCNN
 
+## update20210608
+
+新增yolov5模型剪枝和NCNN INT8量化。
+
+
+
 基于YOLOv5最新[v5.0 release](https://github.com/ultralytics/yolov5/releases/tag/v5.0)，和NCNN官方给出example的差别主要有：
 
 - 激活函数hardswish变为siLu；
@@ -136,3 +142,81 @@ int Swish::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
 ```
 
 和silu一样，那么就可以正常进行推理了，可能需要注意的就是三个输出节点不要弄错就ok。
+
+
+
+## INT8量化
+
+### 1. NCNN源码编译
+
+1. 最新ncnn新增支持int8量化
+
+```
+git clone https://github.com/Tencent/ncnn.git
+cd ncnn
+git submodule update --init
+```
+
+2. 增加Focus层
+
+   将layer/yolov5focus.cpp/.h 两个文件放在ncnn/src/layer下，然后ncnn/src/CMakeList.txt增加：
+
+   ```
+   ncnn_add_layer(YoloV5Focus)
+   ```
+
+3. 编译
+
+不同系统的编译见https://github.com/Tencent/ncnn/wiki/how-to-build
+
+编译完成后会有：
+
+ncnn/build/tools/onnx/onnx2ncnn ：用于onnx转ncnn的工具
+
+/ncnn/build/tools/ncnnoptimize 优化工具
+
+ncnn/build/tools/quantize/ncnn2int8 转int8
+
+ncnn/build/tools/quantize/ncnn2table 生成校准表
+
+### 2. 模型量化
+
+参考https://github.com/Tencent/ncnn/wiki/quantized-int8-inference操作，在ncnn2table工具下，准备我们的检验图片放在images文件夹下，最好是我们训练模型的验证或者测试集，然后
+
+```
+find images/ -type f > imagelist.txt
+./ncnn2table yolov5s-opt.param yolov5s-opt.bin imagelist.txt yolov5s.table mean=[0,0,0] norm=[0.0039215,0.0039215,0.0039215] shape=[416,416,3] pixel=BGR thread=8 method=kl
+```
+
+<p align="center">
+<img src="images/Screenshot from 2021-06-08 21-47-09.png">
+</p>
+
+然后转化模型：
+
+```
+./ncnn2int8 yolov5s-opt.param yolov5s-opt.bn yolov5s-int8.param yolov5s-int8.bin yolov5s.table
+```
+
+### 3. INT8 推理
+
+使用最新的动态库：https://github.com/Tencent/ncnn/releases/tag/20210525
+
+根据你的系统选择。
+
+相关设置：
+
+```
+    yolov5.opt.num_threads = 8;
+    yolov5.opt.use_int8_inference = true;
+```
+
+
+
+|               | input | inference time | model size |
+| ------------- | ----- | -------------- | ---------- |
+| yolov5s       | 416   | 22 ms          | 14.6 M     |
+| yolov5s-prune | 416   | 18 ms          | 1.7 M      |
+| yolov5s-int8  | 416   | 52ms           | 887.5k     |
+
+目前int8量化后效果还不错，但是推理时间慢了很多，待续。
