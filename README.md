@@ -33,7 +33,7 @@ make -j8
 
 ## 安卓
 
-参考https://github.com/nihui/ncnn-android-yolov5，使用这里转的v5.0分支的ncnn模型。
+参考https://github.com/nihui/ncnn-android-yolov5 ，使用这里转的v5.0分支的ncnn模型。
 
 ## Yolov5s剪枝
 见https://blog.csdn.net/IEEE_FELLOW/article/details/117236025
