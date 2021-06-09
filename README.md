@@ -221,8 +221,12 @@ find images/ -type f > imagelist.txt
 FP16模型和INT8模型对比：
 
 <p align="center">
-<img src="images/lADPDhJzwiCvz2HNFoDNCHA_2160_5760.jpg">
+<img src="images/cat.jpg">
 </p>
+
+
+kl和aciq两种量化方式，前者损失会更大。
+
 
 |               | input | inference time | model size |
 | ------------- | ----- | -------------- | ---------- |

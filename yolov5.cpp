@@ -259,7 +259,7 @@ static int detect_yolov5(const cv::Mat& bgr, std::vector<Object>& objects)
 {
     ncnn::Net yolov5;
 
-    yolov5.opt.use_vulkan_compute = true;
+//    yolov5.opt.use_vulkan_compute = true;
     yolov5.opt.num_threads = 8;
     yolov5.opt.use_int8_inference = true;
     // yolov5.opt.use_bf16_storage = true;
@@ -268,8 +268,8 @@ static int detect_yolov5(const cv::Mat& bgr, std::vector<Object>& objects)
 
     // original pretrained model from https://github.com/ultralytics/yolov5
     // the ncnn model https://github.com/nihui/ncnn-assets/tree/master/models
-    yolov5.load_param("../yolov5s-int8.param");
-    yolov5.load_model("../yolov5s-int8.bin");
+    yolov5.load_param("../INT8/yolov5s-int8-aciq.param");
+    yolov5.load_model("../INT8/yolov5s-int8-aciq.bin");
 
     const int target_size = 640;
     const float prob_threshold = 0.25f;
