@@ -219,4 +219,5 @@ find images/ -type f > imagelist.txt
 | yolov5s-prune | 416   | 18 ms          | 1.7 M(fp16)      |
 | yolov5s-int8  | 416   | 52ms           | 887.5k(int8)     |
 
-目前int8量化后效果还不错，但是推理时间慢了很多，待续。
+目前int8量化后效果还不错，但是推理时间慢了很多，可能原因是int8不针对x86，参考https://github.com/Tencent/ncnn/issues/2974
+后续测试arm上加速效果
