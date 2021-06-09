@@ -181,7 +181,7 @@ ncnn/build/tools/quantize/ncnn2table 生成校准表
 
 ### 2. 模型量化
 
-参考https://github.com/Tencent/ncnn/wiki/quantized-int8-inference操作，在ncnn2table工具下，准备我们的检验图片放在images文件夹下，最好是我们训练模型的验证或者测试集，然后
+参考https://github.com/Tencent/ncnn/wiki/quantized-int8-inference 操作，在ncnn2table工具下，准备我们的检验图片放在images文件夹下，最好是我们训练模型的验证或者测试集，然后
 
 ```
 find images/ -type f > imagelist.txt
