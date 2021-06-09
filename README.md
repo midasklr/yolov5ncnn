@@ -5,6 +5,8 @@ YOLOv5转NCNN
 新增yolov5模型剪枝和NCNN INT8量化。
 
 
+项目持续更新，主要包括yolov5s模型的剪枝，int8量化，ncnn模型转换和Android移植测试。
+
 
 基于YOLOv5最新[v5.0 release](https://github.com/ultralytics/yolov5/releases/tag/v5.0)，和NCNN官方给出example的差别主要有：
 
