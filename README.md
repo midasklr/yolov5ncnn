@@ -38,7 +38,7 @@ make -j8
 参考https://github.com/nihui/ncnn-android-yolov5 ，使用这里转的v5.0分支的ncnn模型。
 
 ## Yolov5s剪枝
-见https://blog.csdn.net/IEEE_FELLOW/article/details/117236025
+见https://github.com/midasklr/yolov5prune
 稀疏训练+Bn层剪枝，可以获得更加紧凑的模型，这里一次稀疏训练+60%Bn层剪枝，模型从28M降低到7M。
 
 ## 流程
