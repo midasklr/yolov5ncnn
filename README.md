@@ -183,7 +183,9 @@ ncnn/build/tools/quantize/ncnn2table 生成校准表
 
 ### 2. 模型量化
 
-参考https://github.com/Tencent/ncnn/wiki/quantized-int8-inference 操作，在ncnn2table工具下，准备我们的检验图片放在images文件夹下，最好是我们训练模型的验证或者测试集，然后
+参考https://github.com/Tencent/ncnn/wiki/quantized-int8-inference 操作，在ncnn2table工具下，准备我们的检验图片放在images文件夹下，最好是我们训练模型的验证或者测试集，这里使用coco val数据集5k张图片。
+
+然后
 
 ```
 find images/ -type f > imagelist.txt
@@ -193,12 +195,15 @@ find images/ -type f > imagelist.txt
 <p align="center">
 <img src="images/Screenshot from 2021-06-08 21-47-09.png">
 </p>
+校准表见INT8/yolov5s.table。
 
 然后转化模型：
 
 ```
 ./ncnn2int8 yolov5s-opt.param yolov5s-opt.bn yolov5s-int8.param yolov5s-int8.bin yolov5s.table
 ```
+
+转化后的int8模型见yolov5s-int8.param和yolov5s-int8.bin。
 
 ### 3. INT8 推理
 
@@ -213,7 +218,11 @@ find images/ -type f > imagelist.txt
     yolov5.opt.use_int8_inference = true;
 ```
 
+FP16模型和INT8模型对比：
 
+<p align="center">
+<img src="images/lADPDhJzwiCvz2HNFoDNCHA_2160_5760.jpg">
+</p>
 
 |               | input | inference time | model size |
 | ------------- | ----- | -------------- | ---------- |

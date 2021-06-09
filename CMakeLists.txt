@@ -18,10 +18,10 @@ if(True)
 endif()
 
 include_directories(${OpenCV_DIR}/include
-                    ${PROJECT_SOURCE_DIR}/ncnn-20210507-ubuntu-1604-shared/include/ncnn)
+                    ${PROJECT_SOURCE_DIR}/ncnn-20210525-ubuntu-1604-shared/include/ncnn)
 
 link_directories(${OpenCV_DIR}/lib/
-                 ${PROJECT_SOURCE_DIR}/ncnn-20210507-ubuntu-1604-shared/lib)
+                 ${PROJECT_SOURCE_DIR}/ncnn-20210525-ubuntu-1604-shared/lib)
 set(OpenCV_LIBS opencv_core 
                 opencv_highgui 
                 opencv_imgproc 
